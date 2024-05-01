@@ -25,7 +25,8 @@ mixin _$Member {
   String get name => throw _privateConstructorUsedError;
   String? get address => throw _privateConstructorUsedError;
   String? get phoneNumber => throw _privateConstructorUsedError;
-  String? get nominiName => throw _privateConstructorUsedError;
+  String? get nomineeName => throw _privateConstructorUsedError;
+  String? get nomineeRelation => throw _privateConstructorUsedError;
   DateTime get dateTime => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -44,7 +45,8 @@ abstract class $MemberCopyWith<$Res> {
       String name,
       String? address,
       String? phoneNumber,
-      String? nominiName,
+      String? nomineeName,
+      String? nomineeRelation,
       DateTime dateTime});
 }
 
@@ -66,7 +68,8 @@ class _$MemberCopyWithImpl<$Res, $Val extends Member>
     Object? name = null,
     Object? address = freezed,
     Object? phoneNumber = freezed,
-    Object? nominiName = freezed,
+    Object? nomineeName = freezed,
+    Object? nomineeRelation = freezed,
     Object? dateTime = null,
   }) {
     return _then(_value.copyWith(
@@ -90,9 +93,13 @@ class _$MemberCopyWithImpl<$Res, $Val extends Member>
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String?,
-      nominiName: freezed == nominiName
-          ? _value.nominiName
-          : nominiName // ignore: cast_nullable_to_non_nullable
+      nomineeName: freezed == nomineeName
+          ? _value.nomineeName
+          : nomineeName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      nomineeRelation: freezed == nomineeRelation
+          ? _value.nomineeRelation
+          : nomineeRelation // ignore: cast_nullable_to_non_nullable
               as String?,
       dateTime: null == dateTime
           ? _value.dateTime
@@ -115,7 +122,8 @@ abstract class _$$MemberImplCopyWith<$Res> implements $MemberCopyWith<$Res> {
       String name,
       String? address,
       String? phoneNumber,
-      String? nominiName,
+      String? nomineeName,
+      String? nomineeRelation,
       DateTime dateTime});
 }
 
@@ -135,7 +143,8 @@ class __$$MemberImplCopyWithImpl<$Res>
     Object? name = null,
     Object? address = freezed,
     Object? phoneNumber = freezed,
-    Object? nominiName = freezed,
+    Object? nomineeName = freezed,
+    Object? nomineeRelation = freezed,
     Object? dateTime = null,
   }) {
     return _then(_$MemberImpl(
@@ -159,9 +168,13 @@ class __$$MemberImplCopyWithImpl<$Res>
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String?,
-      nominiName: freezed == nominiName
-          ? _value.nominiName
-          : nominiName // ignore: cast_nullable_to_non_nullable
+      nomineeName: freezed == nomineeName
+          ? _value.nomineeName
+          : nomineeName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      nomineeRelation: freezed == nomineeRelation
+          ? _value.nomineeRelation
+          : nomineeRelation // ignore: cast_nullable_to_non_nullable
               as String?,
       dateTime: null == dateTime
           ? _value.dateTime
@@ -180,7 +193,8 @@ class _$MemberImpl implements _Member {
       required this.name,
       required this.address,
       required this.phoneNumber,
-      required this.nominiName,
+      required this.nomineeName,
+      required this.nomineeRelation,
       required this.dateTime});
 
   factory _$MemberImpl.fromJson(Map<String, dynamic> json) =>
@@ -198,13 +212,15 @@ class _$MemberImpl implements _Member {
   @override
   final String? phoneNumber;
   @override
-  final String? nominiName;
+  final String? nomineeName;
+  @override
+  final String? nomineeRelation;
   @override
   final DateTime dateTime;
 
   @override
   String toString() {
-    return 'Member(id: $id, serialNo: $serialNo, name: $name, address: $address, phoneNumber: $phoneNumber, nominiName: $nominiName, dateTime: $dateTime)';
+    return 'Member(id: $id, serialNo: $serialNo, name: $name, address: $address, phoneNumber: $phoneNumber, nomineeName: $nomineeName, nomineeRelation: $nomineeRelation, dateTime: $dateTime)';
   }
 
   @override
@@ -219,8 +235,10 @@ class _$MemberImpl implements _Member {
             (identical(other.address, address) || other.address == address) &&
             (identical(other.phoneNumber, phoneNumber) ||
                 other.phoneNumber == phoneNumber) &&
-            (identical(other.nominiName, nominiName) ||
-                other.nominiName == nominiName) &&
+            (identical(other.nomineeName, nomineeName) ||
+                other.nomineeName == nomineeName) &&
+            (identical(other.nomineeRelation, nomineeRelation) ||
+                other.nomineeRelation == nomineeRelation) &&
             (identical(other.dateTime, dateTime) ||
                 other.dateTime == dateTime));
   }
@@ -228,7 +246,7 @@ class _$MemberImpl implements _Member {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, serialNo, name, address,
-      phoneNumber, nominiName, dateTime);
+      phoneNumber, nomineeName, nomineeRelation, dateTime);
 
   @JsonKey(ignore: true)
   @override
@@ -251,7 +269,8 @@ abstract class _Member implements Member {
       required final String name,
       required final String? address,
       required final String? phoneNumber,
-      required final String? nominiName,
+      required final String? nomineeName,
+      required final String? nomineeRelation,
       required final DateTime dateTime}) = _$MemberImpl;
 
   factory _Member.fromJson(Map<String, dynamic> json) = _$MemberImpl.fromJson;
@@ -267,7 +286,9 @@ abstract class _Member implements Member {
   @override
   String? get phoneNumber;
   @override
-  String? get nominiName;
+  String? get nomineeName;
+  @override
+  String? get nomineeRelation;
   @override
   DateTime get dateTime;
   @override

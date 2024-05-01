@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:path/path.dart';
-import 'package:trippanachi_vypari/app_util/log/log_functions.dart';
+import 'package:trippanachi_vypari/app_util/field_focus_change/field_focus_change.dart';
 import 'package:trippanachi_vypari/models/member/member.dart';
 import 'package:trippanachi_vypari/screens/home_screen/cubit/edit_state/home_edit_state.dart';
 import 'package:trippanachi_vypari/screens/home_screen/cubit/home_cubit.dart';
@@ -25,11 +24,19 @@ class _AddAreaState extends State<AddArea> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _phoneNumberController = TextEditingController();
-  final TextEditingController _nominiController = TextEditingController();
+  final TextEditingController _nomineeController = TextEditingController();
+  final TextEditingController _nomineeRelationController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
   Member? _memberToEdit;
+
+  final FocusNode _serailFocusNode = FocusNode();
+  final FocusNode _nameFocusNode = FocusNode();
+  final FocusNode _addressFocusNode = FocusNode();
+  final FocusNode _phoneNumberFocusNode = FocusNode();
+  final FocusNode _nomineeFocusNode = FocusNode();
+  final FocusNode _nomineeRelationFocusNode = FocusNode();
 
   @override
   void dispose() {
@@ -37,14 +44,12 @@ class _AddAreaState extends State<AddArea> {
     _nameController.dispose();
     _addressController.dispose();
     _phoneNumberController.dispose();
-    _nominiController.dispose();
+    _nomineeController.dispose();
+    _nomineeRelationController.dispose();
     super.dispose();
   }
 
-  @override
-  void initState() {
-    super.initState();
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +67,8 @@ class _AddAreaState extends State<AddArea> {
           _nameController.text = _memberToEdit?.name ?? "";
           _addressController.text = _memberToEdit?.address ?? "";
           _phoneNumberController.text = _memberToEdit?.phoneNumber ?? "";
-          _nominiController.text = _memberToEdit?.nominiName ?? "";
+          _nomineeController.text = _memberToEdit?.nomineeName ?? "";
+          _nomineeRelationController.text = _memberToEdit?.nomineeRelation ?? "";
         }
 
         return Padding(
@@ -81,6 +87,9 @@ class _AddAreaState extends State<AddArea> {
                 const SizedBox(
                   height: 20,
                 ),
+
+
+                // Serial No row
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -95,20 +104,25 @@ class _AddAreaState extends State<AddArea> {
                       child: Container(
                         color: Colors.white,
                         child: TextFormField(
-                          controller: _serialNoController,
-                          decoration: const InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.zero))),
-                          validator: (value) {
-                            if (value == null) {
-                              return "Null value";
-                            }
-                            if (value.isEmpty) {
-                              return "Empty serial No";
-                            }
-                            return null;
-                          },
-                        ),
+                            controller: _serialNoController,
+                            decoration: const InputDecoration(
+                                border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.zero))),
+                            validator: (value) {
+                              if (value == null) {
+                                return "Null value";
+                              }
+                              if (value.isEmpty) {
+                                return "Empty serial No";
+                              }
+                              return null;
+                            },
+                            focusNode: _serailFocusNode,
+                            onFieldSubmitted: (value) {
+                              fieldFocusChange(
+                                  context, _serailFocusNode, _nameFocusNode);
+                            }),
                       ),
                     )
                   ],
@@ -116,6 +130,9 @@ class _AddAreaState extends State<AddArea> {
                 const SizedBox(
                   height: 32,
                 ),
+
+
+                // Name row
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -145,6 +162,11 @@ class _AddAreaState extends State<AddArea> {
                               }
                               return null;
                             },
+                            focusNode: _nameFocusNode,
+                            onFieldSubmitted: (value) {
+                              fieldFocusChange(
+                                  context, _nameFocusNode, _addressFocusNode);
+                            },
                           ),
                         ))
                   ],
@@ -152,6 +174,9 @@ class _AddAreaState extends State<AddArea> {
                 const SizedBox(
                   height: 32,
                 ),
+
+
+                // Address row
                 Row(
                   children: [
                     const Expanded(
@@ -170,6 +195,11 @@ class _AddAreaState extends State<AddArea> {
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.all(Radius.zero))),
                           maxLines: 3,
+                          focusNode: _addressFocusNode,
+                          onFieldSubmitted: (value) {
+                            fieldFocusChange(context, _addressFocusNode,
+                                _phoneNumberFocusNode);
+                          },
                         ),
                       ),
                     )
@@ -178,6 +208,9 @@ class _AddAreaState extends State<AddArea> {
                 const SizedBox(
                   height: 32,
                 ),
+
+
+                // Phone number row
                 Row(
                   children: [
                     const Expanded(
@@ -187,22 +220,31 @@ class _AddAreaState extends State<AddArea> {
                           style: TextStyle(fontSize: 22),
                         )),
                     Expanded(
-                        flex: 2,
-                        child: Container(
-                          color: Colors.white,
-                          child: TextFormField(
-                            controller: _phoneNumberController,
-                            decoration: const InputDecoration(
-                                border: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.zero))),
+                      flex: 2,
+                      child: Container(
+                        color: Colors.white,
+                        child: TextFormField(
+                          controller: _phoneNumberController,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.zero),
+                            ),
                           ),
-                        ))
+                          focusNode: _phoneNumberFocusNode,
+                          onFieldSubmitted: (value) {
+                            fieldFocusChange(context, _phoneNumberFocusNode,
+                                _nomineeFocusNode);
+                          },
+                        ),
+                      ),
+                    )
                   ],
                 ),
                 const SizedBox(
                   height: 32,
                 ),
+
+                // Nominee row
                 Row(
                   children: [
                     const Expanded(
@@ -216,10 +258,17 @@ class _AddAreaState extends State<AddArea> {
                       child: Container(
                         color: Colors.white,
                         child: TextFormField(
-                          controller: _nominiController,
+                          controller: _nomineeController,
                           decoration: const InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.zero))),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.zero),
+                            ),
+                          ),
+                          focusNode: _nomineeFocusNode,
+                          onFieldSubmitted: (value) {
+                            fieldFocusChange(context, _nomineeFocusNode,
+                                _nomineeRelationFocusNode,);
+                          },
                         ),
                       ),
                     )
@@ -228,6 +277,36 @@ class _AddAreaState extends State<AddArea> {
                 const SizedBox(
                   height: 32,
                 ),
+
+                // Nominee Relation row
+                Row(
+                  children: [
+                    const Expanded(
+                        flex: 1,
+                        child: Text(
+                          "Nominee Relation:- ",
+                          style: TextStyle(fontSize: 22),
+                        )),
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        color: Colors.white,
+                        child: TextFormField(
+                          controller: _nomineeRelationController,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.zero),
+                            ),
+                          ),
+                          focusNode: _nomineeRelationFocusNode,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(height: 32,),
+
+                // Button row
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -244,7 +323,8 @@ class _AddAreaState extends State<AddArea> {
                                     address: _addressController.text.trim(),
                                     phoneNumber:
                                         _phoneNumberController.text.trim(),
-                                    nominiName: _nominiController.text.trim(),
+                                    nomineeName: _nomineeController.text.trim(),
+                                    nomineeRelation: _nomineeRelationController.text.trim(),
                                     dateTime: _memberToEdit?.dateTime ??
                                         DateTime.now(),
                                   );
@@ -255,7 +335,8 @@ class _AddAreaState extends State<AddArea> {
                                   _addressController.clear();
                                   _phoneNumberController.clear();
                                   _nameController.clear();
-                                  _nominiController.clear();
+                                  _nomineeController.clear();
+                                  _nomineeRelationController.clear();
                                 } else {
                                   final member = Member(
                                     serialNo: _serialNoController.text.trim(),
@@ -263,7 +344,8 @@ class _AddAreaState extends State<AddArea> {
                                     address: _addressController.text.trim(),
                                     phoneNumber:
                                         _phoneNumberController.text.trim(),
-                                    nominiName: _nominiController.text.trim(),
+                                    nomineeName: _nomineeController.text.trim(),
+                                    nomineeRelation: _nomineeRelationController.text.trim(),
                                     dateTime: DateTime.now(),
                                   );
                                   widget.homeCubit.insertMemberdata(member);
@@ -272,7 +354,8 @@ class _AddAreaState extends State<AddArea> {
                                   _addressController.clear();
                                   _phoneNumberController.clear();
                                   _nameController.clear();
-                                  _nominiController.clear();
+                                  _nomineeController.clear();
+                                  _nomineeRelationController.clear();
                                 }
 
                                 //widget.homeCubit.getAllMembers();
@@ -305,7 +388,8 @@ class _AddAreaState extends State<AddArea> {
                                 backgroundColor:
                                     MaterialStateProperty.all<Color>(
                                         Colors.indigo),
-                                        foregroundColor: MaterialStateProperty.all<Color>(
+                                foregroundColor:
+                                    MaterialStateProperty.all<Color>(
                                         Colors.white),
                               ),
                               child: const Padding(

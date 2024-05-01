@@ -27,11 +27,7 @@ class _ListAreaState extends State<ListArea> {
 
   bool _sortOrder = false;
 
-  @override
-  void initState() {
-    //_scrollController.jumpTo(0);
-    super.initState();
-  }
+  
 
   @override
   void dispose() {
@@ -91,7 +87,7 @@ class _ListAreaState extends State<ListArea> {
           Expanded(
             child: Container(
              // color: Colors.white,
-              decoration: BoxDecoration(border: Border.all(color: Colors.black54,width: 1),color: Colors.white),
+              decoration: BoxDecoration(border: Border.all(color: Colors.black54,width: 1),color: Colors.white,),
               child: DataTable2(
                 scrollController: _scrollController,
                 minWidth: 20,
@@ -104,7 +100,7 @@ class _ListAreaState extends State<ListArea> {
                 // sortArrowIcon: Icons.sort,
                 columns:  [
                   const DataColumn2(
-                    label: const Text(
+                    label:  Text(
                       "SI No",
                       style: TextStyle(fontSize: 18),
                     ),
@@ -124,7 +120,7 @@ class _ListAreaState extends State<ListArea> {
                     ),
                     size: ColumnSize.M,
                     onSort: (sort,value){
-                      printError("Sort $sort, $value");
+                      
                       _sortOrder = !_sortOrder;
                       
                         widget.homeCubit.sortData(members: widget.memberList);
@@ -153,6 +149,13 @@ class _ListAreaState extends State<ListArea> {
                     ),
                     size: ColumnSize.M,
                   ),
+                  const DataColumn2(
+                    label: Text(
+                      "Nominee Relation",
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    size: ColumnSize.M,
+                  ),
                   const DataColumn2(label: Text(""), size: ColumnSize.S)
                 ],
                 rows: List.generate(
@@ -174,8 +177,10 @@ class _ListAreaState extends State<ListArea> {
                     )),
                     DataCell(Text(widget.memberList[index].address ?? "-")),
                     DataCell(Text(widget.memberList[index].phoneNumber ?? "-")),
-                    DataCell(Text(widget.memberList[index].nominiName ?? "-")),
+                    DataCell(Text(widget.memberList[index].nomineeName ?? "-")),
+                    DataCell(Text(widget.memberList[index].nomineeRelation ?? "-")),
                     DataCell(PopupMenuButton<PopUpMenu>(
+                      tooltip: "",
                       padding: EdgeInsets.zero,
                       icon: const Icon(
                         Icons.more_vert,

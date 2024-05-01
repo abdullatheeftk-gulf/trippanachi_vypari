@@ -13,7 +13,8 @@ class DatabaseRepository{
       "name":member.name,
       "address":member.address,
       "phoneNumber":member.phoneNumber,
-      "nominiName":member.nominiName
+      "nomineeName":member.nomineeName,
+      "nomineeRelation":member.nomineeRelation
     };
     try{
        final id =  await database.insert("Member", value);

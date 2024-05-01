@@ -10,6 +10,11 @@ class DatabaseInit{
 
   static Future<Database>  initLocalDatabase() async{
 
+    final io.Directory directory = await getApplicationDocumentsDirectory();
+
+    String path = p.join(directory.path,'databases','database.db');
+    printError(path);
+
     final io.Directory appDirectory = await getApplicationSupportDirectory();
 
     String dbPath = p.join(appDirectory.path, 'databases', 'mysqlite.db');
@@ -18,7 +23,7 @@ class DatabaseInit{
 
     
 
-    return await databaseFactoryFfi.openDatabase(dbPath);
+    return await databaseFactoryFfi.openDatabase(path);
 
   }
 
@@ -31,7 +36,8 @@ class DatabaseInit{
               name TEXT NOT NULL UNIQUE,
               address TEXT,
               phoneNumber TEXT,
-              nominiName TEXT,
+              nomineeName TEXT,
+              nomineeRelation TEXT,
               dateTime DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL
               )
           '''

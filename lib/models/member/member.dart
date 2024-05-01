@@ -12,7 +12,8 @@ class Member with _$Member {
     required String name,
     required String? address,
     required String? phoneNumber,
-    required String? nominiName,
+    required String? nomineeName,
+    required String? nomineeRelation,
     required DateTime dateTime,
   }) = _Member;
 

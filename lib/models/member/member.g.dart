@@ -12,7 +12,8 @@ _$MemberImpl _$$MemberImplFromJson(Map<String, dynamic> json) => _$MemberImpl(
       name: json['name'] as String,
       address: json['address'] as String?,
       phoneNumber: json['phoneNumber'] as String?,
-      nominiName: json['nominiName'] as String?,
+      nomineeName: json['nomineeName'] as String?,
+      nomineeRelation: json['nomineeRelation'] as String?,
       dateTime: DateTime.parse(json['dateTime'] as String),
     );
 
@@ -23,6 +24,7 @@ Map<String, dynamic> _$$MemberImplToJson(_$MemberImpl instance) =>
       'name': instance.name,
       'address': instance.address,
       'phoneNumber': instance.phoneNumber,
-      'nominiName': instance.nominiName,
+      'nomineeName': instance.nomineeName,
+      'nomineeRelation': instance.nomineeRelation,
       'dateTime': instance.dateTime.toIso8601String(),
     };

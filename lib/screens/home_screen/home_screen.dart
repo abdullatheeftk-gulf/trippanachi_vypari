@@ -138,14 +138,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        width: maxWidth / 2,
+                        width: (maxWidth / 6)*2,
                         child: AddArea(
                           homeCubit: _homeCubit,
                           showProgressBar: _showProgressBar,
                         ),
                       ),
                       SizedBox(
-                        width: maxWidth / 2,
+                        width: (maxWidth / 6)*4,
                         height: maxHeight - 150,
                         child: ListArea(
                           memberList: _memberList,

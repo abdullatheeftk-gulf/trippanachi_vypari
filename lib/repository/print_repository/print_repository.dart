@@ -23,7 +23,7 @@ class PrintRepository {
           build: (context) {
             return pw.Column(children: [
               // Title
-              pw.SizedBox(
+              /* pw.SizedBox(
                 width: double.infinity,
                 child: pw.FittedBox(
                   child: pw.Text(title,
@@ -33,7 +33,9 @@ class PrintRepository {
                         color: PdfColors.blue400,
                       )),
                 ),
-              ),
+              ), */
+
+              pw.Text(title,style: pw.TextStyle(font: titleFont,fontSize: 20,color: PdfColors.green,decoration: pw.TextDecoration.underline)),
               pw.SizedBox(height: 30),
               pw.ListView.separated(
                 itemBuilder: (context, index) {
