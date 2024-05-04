@@ -1,32 +1,34 @@
-
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+//import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart' as pw;
+/* import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw; */
 import 'package:printing/printing.dart';
 import 'package:trippanachi_vypari/screens/print_priview/cubit/print_preview_cubit.dart';
-
 
 class PrintPriviewScreen extends StatelessWidget {
   const PrintPriviewScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-
     final printCubit = context.read<PrintPreviewCubit>();
-    
 
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: const Text("Print Preview"),
       ),
-      body: PdfPreview(build: (format)=>printCubit.generatePdf(format)),
+      body:  PdfPreview(
+        allowSharing: false,
+        canChangeOrientation: false,
+        canChangePageFormat: true,
+        canDebug: false,
+        build: (format) => printCubit.generatePdf(format),
+      ), 
+      
     );
   }
 
-   Future<Uint8List> _generatePdf(PdfPageFormat format, String title) async {
+  /* Future<Uint8List> _generatePdf(PdfPageFormat format, String title) async {
     final pdf = pw.Document(version: PdfVersion.pdf_1_5, compress: true);
     final font = await PdfGoogleFonts.notoSansMalayalamRegular();
     final ByteData imageData = await rootBundle.load("assets/images/vyapari_logo.jpeg");
@@ -54,5 +56,5 @@ class PrintPriviewScreen extends StatelessWidget {
     );
 
     return pdf.save();
-  }
+  } */
 }

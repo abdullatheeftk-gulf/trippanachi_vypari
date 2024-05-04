@@ -98,7 +98,8 @@ class _AddAreaState extends State<AddArea> {
                         child: Text(
                           "Serial No:- ",
                           style: TextStyle(fontSize: 22),
-                        )),
+                        ),
+                        ),
                     Expanded(
                       flex: 2,
                       child: Container(
@@ -122,7 +123,8 @@ class _AddAreaState extends State<AddArea> {
                             onFieldSubmitted: (value) {
                               fieldFocusChange(
                                   context, _serailFocusNode, _nameFocusNode);
-                            }),
+                            },
+                            ),
                       ),
                     )
                   ],
@@ -168,7 +170,8 @@ class _AddAreaState extends State<AddArea> {
                                   context, _nameFocusNode, _addressFocusNode);
                             },
                           ),
-                        ))
+                        ),
+                        )
                   ],
                 ),
                 const SizedBox(
@@ -194,7 +197,7 @@ class _AddAreaState extends State<AddArea> {
                           decoration: const InputDecoration(
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.all(Radius.zero))),
-                          maxLines: 3,
+                          maxLines: 5,
                           focusNode: _addressFocusNode,
                           onFieldSubmitted: (value) {
                             fieldFocusChange(context, _addressFocusNode,

@@ -12,12 +12,12 @@ class DatabaseInit{
 
     final io.Directory directory = await getApplicationDocumentsDirectory();
 
-    String path = p.join(directory.path,'databases','database.db');
-    printError(path);
+    String path = p.join(directory.path,'gulftechinnovations','database.db');
+    
 
-    final io.Directory appDirectory = await getApplicationSupportDirectory();
+    // final io.Directory appDirectory = await getApplicationSupportDirectory();
 
-    String dbPath = p.join(appDirectory.path, 'databases', 'mysqlite.db');
+    // String dbPath = p.join(appDirectory.path, 'databases', 'mysqlite.db');
 
    // printDebug(dbPath);
 
