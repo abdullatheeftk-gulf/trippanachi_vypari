@@ -8,6 +8,8 @@ import 'package:trippanachi_vypari/screens/home_screen/cubit/home_cubit.dart';
 import 'package:trippanachi_vypari/screens/home_screen/cubit/home_listener_state/home_listener_state.dart';
 import 'package:trippanachi_vypari/screens/home_screen/widgets/add_area.dart';
 import 'package:trippanachi_vypari/screens/home_screen/widgets/list_area.dart';
+import 'package:trippanachi_vypari/screens/home_screen/widgets/my_menu_bar.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -42,16 +44,17 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               title: const Text("Delete"),
               content: Text(
-                  "Do you want to delete ${member.name} from the memeber list!"),
+                  "Do you want to delete ${member.name} from the member list!"),
               actions: [
                 ElevatedButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
-                    foregroundColor: MaterialStateProperty.all<Color>(Colors.white)
-                    ),
+                      backgroundColor:
+                          WidgetStateProperty.all<Color>(Colors.red),
+                      foregroundColor:
+                          WidgetStateProperty.all<Color>(Colors.white)),
                   child: const Text("No"),
                 ),
                 ElevatedButton(
@@ -60,9 +63,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.pop(context);
                   },
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-                    foregroundColor: MaterialStateProperty.all<Color>(Colors.white)
-                    ),
+                      backgroundColor:
+                          WidgetStateProperty.all<Color>(Colors.blue),
+                      foregroundColor:
+                          WidgetStateProperty.all<Color>(Colors.white)),
                   child: const Text("Yes"),
                 ),
               ],
@@ -123,29 +127,43 @@ class _HomeScreenState extends State<HomeScreen> {
             body: SingleChildScrollView(
               child: Column(
                 children: [
-                  Container(
-                    width: maxWidth,
-                    height: 150,
-                    color: const Color.fromARGB(255, 110, 136, 184),
-                    child:  Center(
-                      child: Text(
-                        "'പരസ്പര സഹായ നിധി'",
-                        style: GoogleFonts.chilanka(textStyle:const TextStyle(fontSize: 42,color: Colors.white)),
+                  Material(
+                    elevation: 8,
+                    child: Container(
+                      decoration:const  BoxDecoration(
+                         color:  Color.fromARGB(255, 110, 136, 184),
+                      ),
+                      width: maxWidth,
+                      height: 150,
+                     
+                      child: Center(
+                        child: Text(
+                          "'പരസ്പര സഹായ നിധി'",
+                          style: GoogleFonts.chilanka(
+                              textStyle: const TextStyle(
+                                  fontSize: 42, color: Colors.white)),
                         ),
+                      ),
                     ),
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Container(
+                        height: double.maxFinite,
+                        width: 110,
+                        color: const  Color.fromARGB(255, 85, 89, 102),
+                        child: const MyMenuBar()
+                      ),
                       SizedBox(
-                        width: (maxWidth / 6)*2,
+                        width: ((maxWidth-110) / 6) * 2,
                         child: AddArea(
                           homeCubit: _homeCubit,
                           showProgressBar: _showProgressBar,
                         ),
                       ),
                       SizedBox(
-                        width: (maxWidth / 6)*4,
+                        width: ((maxWidth-110) / 6) * 4,
                         height: maxHeight - 150,
                         child: ListArea(
                           memberList: _memberList,
